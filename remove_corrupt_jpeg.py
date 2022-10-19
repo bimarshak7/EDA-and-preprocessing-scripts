@@ -3,6 +3,12 @@
 
 from struct import unpack
 import os
+from PIL import Image
+from PIL import ImageFile
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+
+
     
 marker_mapping = {
     0xffd8: "Start of Image",
@@ -34,23 +40,33 @@ class JPEG:
                 data = data[2+lenchunk:]            
             if len(data)==0:
                 break
+def method1():
+    data_dir = 'DATASET' # dataset direcotr
+    images = []
+    for root,dir,img in os.walk("DATASET/"):
+      for im in img:
+        images.append(root+"/"+im)
 
-data_dir = 'DATASET' # dataset direcotr
-images = []
-for root,dir,img in os.walk("DATASET/"):
-  for im in img:
-    images.append(root+"/"+im)
+    bads = []
+    for img in images:
+      image = JPEG(img) 
+      try:
+        image.decode()   
+      except:
+        bads.append(img)
 
-bads = []
-for img in images:
-  image = JPEG(img) 
-  try:
-    image.decode()   
-  except:
-    bads.append(img)
+    for bad in bads:
+      print(bad)
 
-for bad in bads:
-  print(bad)
+    for name in bads:
+      os.remove(name)
 
-for name in bads:
-  os.remove(name)
+def removeCorruptedImages(path):
+    for filename in os.listdir(path):
+        try:
+            img = Image.open(os.path.join(path,filename))
+            img.verify() 
+        except (IOError, SyntaxError) as e:
+            print('Bad file:', filename)
+            os.remove(os.path.join(path,filename))
+    
