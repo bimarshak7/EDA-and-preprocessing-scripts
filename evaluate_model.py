@@ -1,6 +1,10 @@
 def compare_historys(previous_history, new_history, initial_epochs=5):
     """
-    Compares two model history objects.
+    Compares two model history objects (model trained using checkpoints).
+    Parameters:
+    previous_history: history object of previous model
+    new_history : history object of new_model
+    initial_epoch : number of epoch the model was trained previously
     """
     # Get original history measurements
     acc = previous_history.history["accuracy"]
