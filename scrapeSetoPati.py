@@ -34,14 +34,14 @@ def dig(start_page,end_page):
         continue
 
       title = title.replace("\n","")
-      contents = "".join([ x.text.replace("\n"," ").replace("\t"," ") for x in news])
+      contents = "".join([ x.text.replace("\n"," ").replace("\t"," ") for x in news if len(x.text)>5])
       pub_date = pub_date.split(":")[1].strip().split()[0]
       
       #write in csv
       if len(contents)>20:
-        file.write(f"{j}|{pub_date}|{title}|{contents},\n")
+        file.write(f"{j}¬{pub_date}¬{title}¬{contents},\n")
       c+=1
-      print(f"\rDone writting {c} news",end="")
+      print(f"\rDone writting {c} news\n Current page: {j}",end="")
   except Exception as exp:
       print("Error:: ",exp)
   finally:
