@@ -39,7 +39,7 @@ def dig(start_page,end_page):
       
       #write in csv
       if len(contents)>20:
-        file.write(f"{j}~#{pub_date}#~{title}~#{contents},\n")
+        file.write(f"{j}~#{pub_date}~#{title}~#{contents},\n")
       c+=1
       print(f"\rDone writting {c} news, Current page: {j}",end="")
   except Exception as exp:
