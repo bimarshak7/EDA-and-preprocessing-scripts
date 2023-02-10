@@ -41,7 +41,7 @@ def dig(start_page,end_page):
       if len(contents)>20:
         file.write(f"{j}¬{pub_date}¬{title}¬{contents},\n")
       c+=1
-      print(f"\rDone writting {c} news\n Current page: {j}",end="")
+      print(f"\rDone writting {c} news, Current page: {j}",end="")
   except Exception as exp:
       print("Error:: ",exp)
   finally:
